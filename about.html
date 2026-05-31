@@ -122,7 +122,7 @@
     .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(233,30,140,0.4), transparent); }
     .page-hero-orb { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(233,30,140,0.15), transparent 70%); right: -100px; top: -100px; pointer-events: none; }
     
-    .page-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(233, 30, 140, 0.12); border: 1px solid rgba(233, 30, 140, 0.3); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--magenta-light); margin-bottom: 1.5rem; }
+    .page-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(233, 30, 140, 0.25); border: 1px solid rgba(233, 30, 140, 0.5); border-radius: 100px; padding: 0.4rem 1.1rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); margin-bottom: 1.5rem; backdrop-filter: blur(8px); }
     .page-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; }
     .page-title em { font-style: italic; color: var(--magenta); }
 
@@ -131,7 +131,7 @@
     .section-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--magenta-light); margin-bottom: 1.25rem; }
     .section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--magenta); }
 
-    .bio-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 6rem; align-items: start; }
+    .bio-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
     .bio-img-frame { background: rgba(26, 26, 78, 0.6); border: 1px solid rgba(233, 30, 140, 0.2); border-radius: 2rem; padding: 0.75rem; position: sticky; top: 7rem; }
     .bio-img-frame img { width: 100%; border-radius: calc(2rem - 0.5rem); display: block; object-fit: cover; }
     .bio-pull { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; font-style: italic; line-height: 1.3; color: var(--white); border-left: 3px solid var(--magenta); padding-left: 1.5rem; margin: 2.5rem 0; }
@@ -139,7 +139,7 @@
     .bio-text h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); margin: 2.5rem 0 1rem; }
     .bio-text h3 span { color: var(--magenta); }
 
-    .gifts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+    .gifts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; width: 100%; }
     .gift-card { background: rgba(26, 26, 78, 0.5); border: 1px solid rgba(255,255,255,0.07); border-radius: 1.25rem; padding: 1.5rem; transition: all 500ms var(--ease-spring); }
     .gift-card:hover { border-color: rgba(233,30,140,0.3); transform: translateY(-4px); }
     .gift-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
@@ -452,6 +452,9 @@
   </section>
 
   <footer>
+    <div style="text-align:center; padding: 0 2rem 1rem;">
+      <img src="images/dez-logo.gif" alt="Dez's Skyline" style="height: 70px; mix-blend-mode: lighten; opacity: 0.85;" />
+    </div>
     <div class="footer-inner">
       <a href="index.html" class="footer-logo">Dez's <span>Skyline</span></a>
       <p class="footer-copy">© 2026 Dez's Skyline. All rights reserved. · Designed by <a href="https://moorgraphix.com" target="_blank" style="color:var(--magenta);text-decoration:none;">Moor Graphix</a> · Powder Springs, GA</p>
