@@ -79,7 +79,7 @@
     .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--white); text-decoration: none; transition: color 300ms; }
     .mobile-menu a:hover { color: var(--magenta); }
 
-    .page-hero { min-height: 50dvh; display: flex; align-items: flex-end; padding: 10rem 2rem 5rem; background: linear-gradient(160deg, var(--navy-deep), #150a30); position: relative; overflow: hidden; }
+    .page-hero { min-height: 65dvh; display: flex; align-items: flex-end; position: relative; overflow: hidden; padding: 10rem 2rem 5rem; background: linear-gradient(160deg, rgba(10,10,40,0.5) 0%, rgba(10,10,40,0.3) 100%); position: relative; overflow: hidden; }
     .page-hero::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(233,30,140,0.12), transparent 70%); right: 0; bottom: -200px; }
     .page-hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
     .page-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(233, 30, 140, 0.12); border: 1px solid rgba(233, 30, 140, 0.3); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--magenta-light); margin-bottom: 1.5rem; }
@@ -140,6 +140,34 @@
       .form-row { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
+
+    .page-hero-bg {{
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }}
+    .page-hero-bg img {{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }}
+    .page-hero-bg::after {{
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10,10,40,0.95) 0%,
+        rgba(10,10,40,0.6) 40%,
+        rgba(10,10,40,0.3) 100%
+      );
+    }}
+    .page-hero-inner {{
+      position: relative;
+      z-index: 2;
+    }}
   </style>
 </head>
 <body>
@@ -161,6 +189,9 @@
   </div>
 
   <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="images/Peachtree-Dusk-tn.jpg" alt="Peachtree Dusk — Contact Dez Skyline" />
+    </div>
     <div class="page-hero-inner">
       <div class="page-eyebrow">Reach Out</div>
       <h1 class="page-title">Let's <em>Connect</em></h1>
