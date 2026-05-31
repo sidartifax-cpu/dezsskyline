@@ -59,6 +59,21 @@
   </url>
 
   <url>
+    <loc>https://dezsskyline.com/book.html</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/aoa-book-cover.jpg</image:loc>
+      <image:title>Angles of Atlanta: A Culture of Resilience and Soul — by Desirée James</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/aoa-protest-spread.jpg</image:loc>
+      <image:title>Protest 2025 — inside spread from Angles of Atlanta</image:title>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://dezsskyline.com/contact.html</loc>
     <lastmod>2026-05-31</lastmod>
     <changefreq>yearly</changefreq>
