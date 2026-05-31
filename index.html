@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dez's Skyline — Jazz, Soul & Photography</title>
+  <meta name="description" content="An eclectic mix of jazz, soul and photography. Fine art prints, radio show, and visual storytelling by Desiree James." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #12123a;
+      --navy-deep: #0a0a28;
+      --navy-mid: #1a1a4e;
+      --magenta: #e91e8c;
+      --magenta-light: #f050a8;
+      --gold: #f5c518;
+      --gold-dim: #c9a010;
+      --cream: #faf6f0;
+      --white: #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--navy-deep);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: rgba(18, 18, 58, 0.7);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(233, 30, 140, 0.25);
+      border-radius: 100px;
+      padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+      white-space: nowrap;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      margin-right: 2rem;
+    }
+
+    .nav-logo span { color: var(--magenta); }
+
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 100px;
+      transition: all 500ms var(--ease-spring);
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--white);
+      background: rgba(233, 30, 140, 0.2);
+    }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy-deep) !important;
+      background: var(--magenta) !important;
+      padding: 0.6rem 1.2rem !important;
+      border-radius: 100px !important;
+      margin-left: 0.5rem;
+      transition: all 500ms var(--ease-spring) !important;
+    }
+
+    .nav-cta:hover { background: var(--magenta-light) !important; transform: scale(1.04); }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50px;
+      border: none;
+      background: transparent;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 400ms var(--ease-spring);
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile menu overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 85;
+      background: rgba(10, 10, 40, 0.96);
+      backdrop-filter: blur(24px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 500ms var(--ease-spring);
+    }
+    .mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 80ms; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 140ms; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 200ms; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 260ms; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 320ms; }
+    .mobile-menu a:hover { color: var(--magenta); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 2rem 4rem;
+    }
+
+    /* animated gradient orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--magenta), transparent 70%);
+      top: -100px; right: -100px;
+      animation-delay: 0s;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #3a2080, transparent 70%);
+      bottom: -80px; left: -80px;
+      animation-delay: 3s;
+    }
+    .hero-orb-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, var(--gold), transparent 70%);
+      top: 40%; left: 30%;
+      opacity: 0.12;
+      animation-delay: 5s;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(233, 30, 140, 0.12);
+      border: 1px solid rgba(233, 30, 140, 0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--magenta-light);
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 800ms var(--ease-out) 200ms forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--magenta);
+      border-radius: 50%;
+    }
+
+    .hero-logo {
+      width: min(480px, 90vw);
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 900ms var(--ease-out) 400ms forwards;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 900ms var(--ease-out) 500ms forwards;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--magenta);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 900ms var(--ease-out) 650ms forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 900ms var(--ease-out) 800ms forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--magenta);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 1.5rem 0.9rem 2rem;
+      border-radius: 100px;
+      transition: all 600ms var(--ease-spring);
+    }
+    .btn-primary .icon-wrap {
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: all 500ms var(--ease-spring);
+    }
+    .btn-primary:hover { background: var(--magenta-light); transform: scale(1.03); }
+    .btn-primary:hover .icon-wrap { transform: translateX(2px) translateY(-1px) scale(1.1); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.9rem 1.5rem 0.9rem 2rem;
+      border-radius: 100px;
+      transition: all 600ms var(--ease-spring);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); transform: scale(1.03); }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: fadeUp 800ms var(--ease-out) 1200ms forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--magenta));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 8rem 2rem; position: relative; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--magenta-light);
+      margin-bottom: 1.25rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--magenta);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--magenta); }
+
+    /* ─── GALLERY SECTION ─── */
+    .gallery-section {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      background: var(--navy-mid);
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 700ms var(--ease-spring);
+    }
+
+    .gallery-item.visible { opacity: 1; transform: translateY(0); }
+
+    .gallery-item:nth-child(1) { grid-column: span 7; grid-row: span 2; }
+    .gallery-item:nth-child(2) { grid-column: span 5; }
+    .gallery-item:nth-child(3) { grid-column: span 5; }
+    .gallery-item:nth-child(4) { grid-column: span 4; }
+    .gallery-item:nth-child(5) { grid-column: span 4; }
+    .gallery-item:nth-child(6) { grid-column: span 4; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      object-fit: cover;
+      display: block;
+      transition: transform 800ms var(--ease-spring);
+    }
+
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,40,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 500ms var(--ease-out);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+
+    .gallery-item-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    /* ─── AUDIO SECTION ─── */
+    .audio-section {
+      background: var(--navy-mid);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audio-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(233,30,140,0.1), transparent 60%);
+      pointer-events: none;
+    }
+
+    .audio-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .audio-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    /* custom audio player */
+    .audio-player-wrap {
+      background: rgba(10, 10, 40, 0.6);
+      border: 1px solid rgba(233, 30, 140, 0.2);
+      border-radius: 1.5rem;
+      padding: 2rem;
+    }
+
+    .audio-player-wrap p.label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .track-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .track-artist {
+      font-size: 0.85rem;
+      color: var(--magenta-light);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .play-btn {
+      width: 52px; height: 52px;
+      background: var(--magenta);
+      border: none;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: white;
+      transition: all 500ms var(--ease-spring);
+      flex-shrink: 0;
+    }
+    .play-btn:hover { background: var(--magenta-light); transform: scale(1.08); }
+
+    .audio-progress {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .audio-progress-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0%;
+      background: linear-gradient(to right, var(--magenta), var(--gold));
+      border-radius: 4px;
+      transition: width 100ms linear;
+    }
+
+    .audio-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* visualizer bars */
+    .visualizer {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 32px;
+      margin-top: 1rem;
+    }
+    .viz-bar {
+      flex: 1;
+      background: var(--magenta);
+      border-radius: 2px;
+      opacity: 0.4;
+      height: 30%;
+      transition: height 200ms ease;
+    }
+    .viz-bar.active {
+      animation: vizDance var(--speed, 0.6s) ease-in-out infinite alternate;
+    }
+    @keyframes vizDance {
+      from { height: 10%; opacity: 0.3; }
+      to { height: 90%; opacity: 0.9; }
+    }
+
+    /* ─── ABOUT TEASER ─── */
+    .about-section {
+      background: var(--navy-deep);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-image-frame {
+      background: rgba(26, 26, 78, 0.6);
+      border: 1px solid rgba(233, 30, 140, 0.2);
+      border-radius: 2rem;
+      padding: 0.75rem;
+    }
+
+    .about-image-frame img {
+      width: 100%;
+      border-radius: calc(2rem - 0.5rem);
+      display: block;
+      object-fit: cover;
+      max-height: 420px;
+    }
+
+    .about-image-badge {
+      position: absolute;
+      bottom: -1rem;
+      right: -1rem;
+      background: var(--magenta);
+      border-radius: 1rem;
+      padding: 1rem 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--white);
+      box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+    }
+
+    .about-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── PRINTS SHOP ─── */
+    .shop-section {
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .print-card {
+      background: rgba(26, 26, 78, 0.5);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 600ms var(--ease-spring);
+      opacity: 0;
+      transform: translateY(20px);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .print-card.visible { opacity: 1; transform: translateY(0); }
+
+    .print-card:hover {
+      border-color: rgba(233, 30, 140, 0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(233,30,140,0.15);
+    }
+
+    .print-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 800ms var(--ease-spring);
+    }
+
+    .print-card:hover img { transform: scale(1.05); }
+
+    .print-card-info {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .print-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .print-card-cat {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .print-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .print-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .print-btn {
+      background: rgba(233, 30, 140, 0.15);
+      border: 1px solid rgba(233,30,140,0.3);
+      color: var(--magenta-light);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 400ms var(--ease-spring);
+    }
+
+    .print-btn:hover {
+      background: var(--magenta);
+      border-color: var(--magenta);
+      color: white;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      background: var(--navy-mid);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      padding-top: 1rem;
+    }
+
+    .contact-info p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--white);
+      transition: all 400ms var(--ease-out);
+    }
+
+    .contact-link-icon {
+      width: 44px; height: 44px;
+      background: rgba(233, 30, 140, 0.1);
+      border: 1px solid rgba(233, 30, 140, 0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      transition: all 400ms var(--ease-spring);
+    }
+
+    .contact-link:hover .contact-link-icon {
+      background: var(--magenta);
+      border-color: var(--magenta);
+      transform: scale(1.1);
+    }
+
+    .contact-link-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ─── FORM ─── */
+    .form-shell {
+      background: rgba(10, 10, 40, 0.6);
+      border: 1px solid rgba(233, 30, 140, 0.15);
+      border-radius: 2rem;
+      padding: 0.75rem;
+    }
+
+    .form-core {
+      background: rgba(18, 18, 58, 0.8);
+      border-radius: calc(2rem - 0.5rem);
+      padding: 2.5rem;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.75rem;
+      padding: 0.85rem 1rem;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 400ms var(--ease-out);
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: rgba(233, 30, 140, 0.5);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 0 0 3px rgba(233,30,140,0.08);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--magenta);
+      border: none;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 500ms var(--ease-spring);
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: var(--magenta-light); transform: scale(1.01); }
+    .form-submit:active { transform: scale(0.99); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy-deep);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .footer-logo span { color: var(--magenta); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: all 400ms var(--ease-spring);
+    }
+
+    .social-pill:hover {
+      background: rgba(233,30,140,0.15);
+      border-color: rgba(233,30,140,0.3);
+      color: var(--white);
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      section { padding: 5rem 1.25rem; }
+
+      nav { padding: 0.5rem 0.5rem 0.5rem 1.25rem; width: calc(100% - 2rem); }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .gallery-item:nth-child(2) { grid-column: span 1; }
+      .gallery-item:nth-child(3) { grid-column: span 1; }
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+      .gallery-item:nth-child(5) { grid-column: span 1; }
+      .gallery-item:nth-child(6) { grid-column: span 2; }
+
+      .audio-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-stats { gap: 1.5rem; }
+      .shop-grid { grid-template-columns: 1fr 1fr; }
+      .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-socials { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .shop-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(n) { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Dez's <span>Skyline</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="shop.html" class="nav-links nav-cta">Shop Prints</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="shop.html">Shop Prints</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Powder Springs, Georgia · Est. 2020</span>
+      <img src="images/dez-logo.jpg" alt="Dez's Skyline" class="hero-logo" />
+      <h1 class="hero-headline">Where <em>Jazz</em> Meets<br />the Lens</h1>
+      <p class="hero-sub">Fine art photography. Soulful radio. Timeless stories.</p>
+      <div class="hero-ctas">
+        <a href="portfolio.html" class="btn-primary">
+          Explore Portfolio
+          <span class="icon-wrap">→</span>
+        </a>
+        <a href="shop.html" class="btn-secondary">
+          Shop Fine Art Prints
+          <span>✦</span>
+        </a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="gallery-section">
+    <div class="section-inner">
+      <div class="gallery-header">
+        <div>
+          <span class="section-eyebrow">Photography</span>
+          <h2 class="section-title">Captured <em>Moments</em></h2>
+        </div>
+        <a href="portfolio.html" class="btn-secondary" style="flex-shrink:0;">View Full Portfolio →</a>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-item">
+          <img src="https://dezsskyline.com/wp-content/uploads/2021/10/Pharoah-Sanders.jpg" alt="Pharoah Sanders" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Pharoah Sanders</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://dezsskyline.com/wp-content/uploads/2020/08/ATL-Reflections-tn.jpg" alt="ATL Reflections" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">ATL Reflections</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://dezsskyline.com/wp-content/uploads/2021/10/Boney-James-3-e1635016717460.jpg" alt="Boney James" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Boney James</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://dezsskyline.com/wp-content/uploads/2020/08/Oculus-911-Memorial-tn.jpg" alt="Oculus" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Oculus Memorial</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://dezsskyline.com/wp-content/uploads/2021/10/Najee-3.jpg" alt="Najee" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Najee</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://dezsskyline.com/wp-content/uploads/2020/08/Pettus-2-tn.jpg" alt="Pettus Bridge" loading="lazy" />
+          <div class="gallery-item-overlay"><span class="gallery-item-label">Pettus Bridge</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIO SECTION -->
+  <section class="audio-section">
+    <div class="section-inner">
+      <div class="audio-layout">
+        <div class="audio-text reveal">
+          <span class="section-eyebrow">Radio Show</span>
+          <h2 class="section-title">The <em>Dez's Skyline</em><br />Show</h2>
+          <p>Step into a world where jazz and soul collide — a weekly audio journey curated by Desiree James. From velvet vocals to soulful instrumentals, this is music that heals.</p>
+          <a href="https://www.youtube.com/channel/UCojfNzP__pvOM0Yyw_Fop-A" target="_blank" rel="noopener" class="btn-secondary">Listen on YouTube ↗</a>
+        </div>
+        <div class="reveal" style="transition-delay: 200ms;">
+          <div class="audio-player-wrap">
+            <p class="label">Now Playing</p>
+            <div class="track-title">Dez's Skyline Show — Audio Demo</div>
+            <div class="track-artist">Hosted by Desiree James</div>
+            <div class="audio-controls">
+              <button class="play-btn" id="playBtn" aria-label="Play/Pause">▶</button>
+              <div class="audio-progress" id="audioProgress">
+                <div class="audio-progress-fill" id="progressFill"></div>
+              </div>
+              <span class="audio-time" id="audioTime">0:00</span>
+            </div>
+            <div class="visualizer" id="visualizer">
+              <!-- bars generated by JS -->
+            </div>
+            <audio id="audioPlayer" src="audio/demo.mp3" preload="metadata"></audio>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section class="about-section">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-image-wrap reveal">
+          <div class="about-image-frame">
+            <img src="https://dezsskyline.com/wp-content/uploads/2020/08/123_1003.jpg" alt="Desiree James" />
+          </div>
+          <div class="about-image-badge">Since 1987<br/>in Atlanta</div>
+        </div>
+        <div class="about-text reveal" style="transition-delay: 150ms;">
+          <span class="section-eyebrow">About Dez</span>
+          <h2 class="section-title">A Renaissance<br /><em>Woman</em></h2>
+          <p>Rooted in New Iberia, Louisiana — Desiree James is a storyteller, musicologist, and fine art photographer whose gifts span decades. Her lens captures the soul of a moment; her voice carries the weight of history.</p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-num">35+</span>
+              <span class="stat-label">Years in Atlanta</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">100+</span>
+              <span class="stat-label">Fine Art Prints</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">∞</span>
+              <span class="stat-label">Stories Told</span>
+            </div>
+          </div>
+          <a href="about.html" class="btn-primary">
+            Her Full Story
+            <span class="icon-wrap">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP PREVIEW -->
+  <section class="shop-section">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 1rem;" class="reveal">
+        <span class="section-eyebrow">Fine Art Prints</span>
+        <h2 class="section-title" style="margin-bottom: 0.5rem;">Own a Piece of the <em>Story</em></h2>
+        <p style="color: var(--text-muted); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem;">Museum-quality prints starting at $25</p>
+      </div>
+      <div class="shop-grid">
+        <a href="shop.html" class="print-card">
+          <img src="https://dezsskyline.com/wp-content/uploads/2020/08/NYC-BrickHouse-tn.jpg" alt="NYC BrickHouse" loading="lazy" />
+          <div class="print-card-info">
+            <div class="print-card-title">NYC BrickHouse</div>
+            <div class="print-card-cat">Urban · Architecture</div>
+            <div class="print-card-footer">
+              <span class="print-price">From $25</span>
+              <span class="print-btn">Order Print</span>
+            </div>
+          </div>
+        </a>
+        <a href="shop.html" class="print-card" style="transition-delay: 100ms;">
+          <img src="https://dezsskyline.com/wp-content/uploads/2020/08/Pettus-2-tn.jpg" alt="Pettus Bridge" loading="lazy" />
+          <div class="print-card-info">
+            <div class="print-card-title">Bloody Sunday</div>
+            <div class="print-card-cat">Historic · Civil Rights</div>
+            <div class="print-card-footer">
+              <span class="print-price">From $25</span>
+              <span class="print-btn">Order Print</span>
+            </div>
+          </div>
+        </a>
+        <a href="shop.html" class="print-card" style="transition-delay: 200ms;">
+          <img src="https://dezsskyline.com/wp-content/uploads/2020/08/ATL-Reflections-BW-tn.jpg" alt="ATL Reflections BW" loading="lazy" />
+          <div class="print-card-info">
+            <div class="print-card-title">ATL Reflections</div>
+            <div class="print-card-cat">Cityscape · Black &amp; White</div>
+            <div class="print-card-footer">
+              <span class="print-price">From $25</span>
+              <span class="print-btn">Order Print</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div style="text-align: center; margin-top: 3rem;" class="reveal">
+        <a href="shop.html" class="btn-primary">
+          Browse All Prints
+          <span class="icon-wrap">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT STRIP -->
+  <section class="contact-section">
+    <div class="section-inner">
+      <div class="contact-layout">
+        <div class="contact-info reveal">
+          <span class="section-eyebrow">Get in Touch</span>
+          <h2 class="section-title">Let's <em>Connect</em></h2>
+          <p>Inquiries about prints, radio appearances, or collaborations are always welcome. Reach out — Dez would love to hear from you.</p>
+          <div class="contact-links">
+            <a href="mailto:info@dezsskyline.com" class="contact-link">
+              <span class="contact-link-icon">✉</span>
+              <span class="contact-link-text">info@dezsskyline.com</span>
+            </a>
+            <a href="https://www.facebook.com/desiree.d.james" target="_blank" class="contact-link">
+              <span class="contact-link-icon">f</span>
+              <span class="contact-link-text">Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/dezisky22/" target="_blank" class="contact-link">
+              <span class="contact-link-icon">◎</span>
+              <span class="contact-link-text">@dezisky22</span>
+            </a>
+            <a href="https://www.youtube.com/channel/UCojfNzP__pvOM0Yyw_Fop-A" target="_blank" class="contact-link">
+              <span class="contact-link-icon">▶</span>
+              <span class="contact-link-text">YouTube Channel</span>
+            </a>
+          </div>
+        </div>
+        <div class="reveal" style="transition-delay: 150ms;">
+          <div class="form-shell">
+            <div class="form-core">
+              <form id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" id="fname" name="fname" placeholder="Desiree" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" id="lname" name="lname" placeholder="James" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                </div>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" id="subject" name="subject" placeholder="Print inquiry, collaboration, etc." />
+                </div>
+                <div class="form-group">
+                  <label for="message">Your Message</label>
+                  <textarea id="message" name="message" placeholder="Tell Dez what's on your heart..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Message ✦</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Dez's <span>Skyline</span></a>
+      <p class="footer-copy">© 2026 Dez's Skyline. All rights reserved. · Powder Springs, GA</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/desiree.d.james" target="_blank" class="social-pill">f Facebook</a>
+        <a href="https://www.instagram.com/dezisky22/" target="_blank" class="social-pill">◎ Instagram</a>
+        <a href="https://www.youtube.com/channel/UCojfNzP__pvOM0Yyw_Fop-A" target="_blank" class="social-pill">▶ YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── HAMBURGER ───
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ─── SCROLL REVEAL ───
+    const revealEls = document.querySelectorAll('.reveal, .gallery-item, .print-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ─── AUDIO PLAYER ───
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const progressFill = document.getElementById('progressFill');
+    const audioTime = document.getElementById('audioTime');
+    const vizContainer = document.getElementById('visualizer');
+    const NUM_BARS = 28;
+
+    // Generate visualizer bars
+    for (let i = 0; i < NUM_BARS; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'viz-bar';
+      bar.style.setProperty('--speed', (0.4 + Math.random() * 0.5) + 's');
+      vizContainer.appendChild(bar);
+    }
+
+    let isPlaying = false;
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        playBtn.innerHTML = '▶';
+        document.querySelectorAll('.viz-bar').forEach(b => b.classList.remove('active'));
+      } else {
+        audio.play().catch(() => {
+          // No audio file yet — show placeholder behavior
+          playBtn.innerHTML = '⏸';
+          animateVisualizer();
+        });
+        playBtn.innerHTML = '⏸';
+        animateVisualizer();
+      }
+      isPlaying = !isPlaying;
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      progressFill.style.width = pct + '%';
+      const m = Math.floor(audio.currentTime / 60);
+      const s = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
+      audioTime.textContent = m + ':' + s;
+    });
+
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      playBtn.innerHTML = '▶';
+      progressFill.style.width = '0%';
+      document.querySelectorAll('.viz-bar').forEach(b => b.classList.remove('active'));
+    });
+
+    document.getElementById('audioProgress').addEventListener('click', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      if (audio.duration) {
+        audio.currentTime = ratio * audio.duration;
+      }
+    });
+
+    function animateVisualizer() {
+      document.querySelectorAll('.viz-bar').forEach(b => b.classList.add('active'));
+    }
+
+    // ─── CONTACT FORM ───
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Sending...';
+      btn.style.opacity = '0.7';
+
+      const data = new FormData(e.target);
+      const body = `Name: ${data.get('fname')} ${data.get('lname')}\nEmail: ${data.get('email')}\nSubject: ${data.get('subject')}\n\n${data.get('message')}`;
+
+      // Mailto fallback (works without backend)
+      const mailto = `mailto:info@dezsskyline.com?subject=${encodeURIComponent(data.get('subject') || 'Website Inquiry')}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+
+      setTimeout(() => {
+        btn.textContent = 'Message Sent ✦';
+        btn.style.background = '#1a8c4e';
+        btn.style.opacity = '1';
+        e.target.reset();
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
