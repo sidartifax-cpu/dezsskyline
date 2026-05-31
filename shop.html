@@ -202,6 +202,88 @@
       .footer-inner { flex-direction: column; text-align: center; }
     }
     @media (max-width: 480px) { .product-grid { grid-template-columns: 1fr 1fr; } .size-grid { grid-template-columns: repeat(3,1fr); } }
+
+    /* ─── FLOATING BOOK BAR ─── */
+    .book-float-bar {
+      background: linear-gradient(90deg, #1a0808, #2d0f05 50%, #0f0f35);
+      border-top: 1px solid rgba(196,75,26,0.3);
+      padding: 1.25rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-float-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(245,197,24,0.06), transparent 60%);
+      pointer-events: none;
+    }
+    .book-float-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .book-float-img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 0.4rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+    }
+    .book-float-text {
+      flex: 1;
+    }
+    .book-float-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e8834a;
+      margin-bottom: 0.2rem;
+    }
+    .book-float-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .book-float-title em { font-style: italic; color: var(--gold); }
+    .book-float-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .book-float-btn-gold {
+      background: var(--gold);
+      color: #1a0a00;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.6rem 1.1rem;
+      border-radius: 100px;
+      transition: all 400ms var(--ease-spring);
+      white-space: nowrap;
+    }
+    .book-float-btn-gold:hover { background: #ffd740; transform: scale(1.04); }
+    .book-float-btn-ghost {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 300ms;
+      white-space: nowrap;
+    }
+    .book-float-btn-ghost:hover { color: white; }
+    @media (max-width: 600px) {
+      .book-float-bar { padding: 1rem 1.25rem; }
+      .book-float-btn-ghost { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -221,6 +303,21 @@
     <a href="index.html">Home</a><a href="about.html">About</a>
     <a href="portfolio.html">Portfolio</a><a href="shop.html">Shop</a>
     <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- BOOK PROMO BAR -->
+  <div class="book-float-bar">
+    <div class="book-float-inner">
+      <img src="images/aoa-book-cover.jpg" alt="Angles of Atlanta" class="book-float-img" />
+      <div class="book-float-text">
+        <div class="book-float-label">✦ New Hardcover Book — Now Available</div>
+        <div class="book-float-title">Angles of <em>Atlanta</em> — A Culture of Resilience and Soul</div>
+      </div>
+      <div class="book-float-actions">
+        <a href="book.html" class="book-float-btn-ghost">Learn More</a>
+        <a href="https://www.amazon.com/Angles-Atlanta-Culture-Resilience-Soul/dp/B0CKVBLQ1K" target="_blank" rel="noopener" class="book-float-btn-gold">🛒 Buy Now</a>
+      </div>
+    </div>
   </div>
 
   <div class="page-hero">

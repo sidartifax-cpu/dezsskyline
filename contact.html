@@ -149,6 +149,7 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="book.html">The Book</a></li>
       <li><a href="shop.html">Shop</a></li>
       <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
@@ -204,7 +205,11 @@
         <div class="reveal" style="transition-delay: 150ms;">
           <div class="form-shell">
             <div class="form-core">
-              <form onsubmit="handleSubmit(event)">
+              <form action="https://formspree.io/f/mojbybnq" method="POST">
+                <!-- Hidden fields so you know it came from Dez's Skyline -->
+                <input type="hidden" name="_subject" value="New Message — Dez's Skyline" />
+                <input type="hidden" name="_replyto" value="" />
+                <input type="hidden" name="site" value="dezsskyline.com" />
                 <div class="form-row">
                   <div class="form-group"><label>First Name</label><input type="text" name="fname" required placeholder="Desiree" /></div>
                   <div class="form-group"><label>Last Name</label><input type="text" name="lname" required placeholder="James" /></div>
@@ -214,11 +219,11 @@
                 <div class="form-group">
                   <label>Inquiry Type</label>
                   <select name="type">
-                    <option value="print">Print Order / Inquiry</option>
-                    <option value="radio">Radio / Media Appearance</option>
-                    <option value="collab">Collaboration</option>
-                    <option value="photography">Photography Services</option>
-                    <option value="general">General Hello</option>
+                    <option value="Print Order / Inquiry">Print Order / Inquiry</option>
+                    <option value="Radio / Media Appearance">Radio / Media Appearance</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="Photography Services">Photography Services</option>
+                    <option value="General Hello">General Hello</option>
                   </select>
                 </div>
                 <div class="form-group"><label>Subject</label><input type="text" name="subject" placeholder="What's on your heart?" /></div>
@@ -245,16 +250,11 @@
   </footer>
 
   <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      const data = new FormData(e.target);
-      const subject = `${data.get('type') || 'Inquiry'}: ${data.get('subject') || 'Message from dezsskyline.com'}`;
-      const body = `From: ${data.get('fname')} ${data.get('lname')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone') || 'N/A'}\nType: ${data.get('type')}\n\n${data.get('message')}`;
-      window.location.href = `mailto:info@dezsskyline.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Message Sent! ✦';
-      btn.style.background = '#1a8c4e';
-      setTimeout(() => { btn.textContent = 'Send My Message ✦'; btn.style.background = ''; e.target.reset(); }, 3000);
+    // Formspree handles submission — show success message on return
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      const form = document.querySelector('form');
+      form.innerHTML = '<div style="text-align:center;padding:2rem;"><div style="font-size:2rem;margin-bottom:1rem;">✦</div><h3 style=\'font-family:Playfair Display,serif;font-size:1.4rem;margin-bottom:0.5rem;\'>Message Sent!</h3><p style=\'color:rgba(255,255,255,0.7);\'>Dez will be in touch soon.</p></div>';
     }
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
