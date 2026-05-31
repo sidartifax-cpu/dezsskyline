@@ -118,10 +118,10 @@
     .mobile-menu.open a:nth-child(5) { transition-delay: 320ms; }
     .mobile-menu a:hover { color: var(--magenta); }
 
-    .page-hero { min-height: 55dvh; display: flex; align-items: flex-end; padding: 10rem 2rem 5rem; position: relative; overflow: hidden; background: linear-gradient(160deg, rgba(10,10,40,0.5) 0%, rgba(10,10,40,0.3) 100%); }
+    
     .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(233,30,140,0.4), transparent); }
     .page-hero-orb { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(233,30,140,0.15), transparent 70%); right: -100px; top: -100px; pointer-events: none; }
-    .page-hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+    
     .page-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(233, 30, 140, 0.12); border: 1px solid rgba(233, 30, 140, 0.3); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--magenta-light); margin-bottom: 1.5rem; }
     .page-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.03em; }
     .page-title em { font-style: italic; color: var(--magenta); }
@@ -269,33 +269,56 @@
       .book-float-btn-ghost { display: none; }
     }
 
-    .page-hero-bg {{
+    }
+    }
+    }
+    }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      position: relative;
+      width: 100%;
+      height: 85dvh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .page-hero-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
-    }}
-    .page-hero-bg img {{
+    }
+
+    .page-hero-bg img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       display: block;
-    }}
-    .page-hero-bg::after {{
+    }
+
+    .page-hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to top,
-        rgba(10,10,40,0.95) 0%,
-        rgba(10,10,40,0.6) 40%,
-        rgba(10,10,40,0.3) 100%
+        rgba(10,10,40,0.97) 0%,
+        rgba(10,10,40,0.5) 35%,
+        rgba(10,10,40,0.15) 65%,
+        rgba(10,10,40,0.05) 100%
       );
-    }}
-    .page-hero-inner {{
+    }
+
+    .page-hero-inner {
       position: relative;
       z-index: 2;
-    }}
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 2rem 4rem;
+    }
   </style>
 </head>
 <body>
