@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://dezsskyline.com/</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/dez-logo.gif</image:loc>
+      <image:title>Dez's Skyline Logo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://dezsskyline.com/about.html</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/123_1003.jpg</image:loc>
+      <image:title>Desiree James — Fine Art Photographer</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://dezsskyline.com/portfolio.html</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/ATL-Reflections-tn.jpg</image:loc>
+      <image:title>ATL Reflections — Fine Art Photography by Desiree James</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/Pettus-2-tn.jpg</image:loc>
+      <image:title>Bloody Sunday — Edmund Pettus Bridge</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/Pharoah-Sanders.jpg</image:loc>
+      <image:title>Pharoah Sanders — Jazz Photography</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://dezsskyline.com/shop.html</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/ATL-Reflections-tn.jpg</image:loc>
+      <image:title>ATL Reflections Fine Art Print</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://dezsskyline.com/images/NYC-BrickHouse-tn.jpg</image:loc>
+      <image:title>NYC BrickHouse Fine Art Print</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://dezsskyline.com/contact.html</loc>
+    <lastmod>2026-05-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
